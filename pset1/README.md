@@ -1,3 +1,3 @@
-# cs50x
+# pset1
 
-Repository of problem sets from edx's CS50x
+Problem set 1 solutions, more comfortable problems chosen
