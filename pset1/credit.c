@@ -10,7 +10,7 @@ int main (void)
     int otherDigits = 0;
     int total;
     int count = 0;
-    string validNum = "INVALID";
+    bool validNum = false;
     
     // Example card num:
     // 378282246310005 (AmEx);
@@ -52,15 +52,30 @@ int main (void)
     total = doubles + otherDigits;
     
     if (total % 10 == 0) {
-        validNum = "VALID";
+        validNum = true;
     }
     
     // Get first 2 digits of number
     int countMinus = count - 2;
     long long first = cardNum / (pow(10, countMinus));
     
-    printf("Total: %i\nCount: %i\nValid Number: %s\n", total, count, validNum);
-    printf("First: %lld\n", first);
+    // Check if number length and first digits match
+    if (validNum) {
+        if (count == 15 && (first == 34 || first == 37)) {
+            printf("AMEX\n");
+        } else if (count == 16 && (first >= 51 && first <= 55)) {
+            printf("MASTERCARD\n");
+        } else if ((count == 13 || count == 16) && first / 10 == 4) {
+            printf("VISA\n");
+        } else {
+            printf("INVALID\n");
+        }
+    } else {
+        printf("INVALID\n");
+    }
+    
+    // printf("Total: %i\nCount: %i\nValid Number: %s\n", total, count, validNum);
+    // printf("First: %lld\n", first);
     
     return 0;
 }
