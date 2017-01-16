@@ -1,6 +1,7 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int main (int argc, string argv[]) 
 {
@@ -23,7 +24,7 @@ int main (int argc, string argv[])
     
     for (int i = 0, n = strlen(text); i < n; i++) {
         // If char is 'A'-'Z'
-        if (text[i] >= 65 && text[i] <= 90)
+        if (isupper(text[i]))
         {
             // If shift goes higher than 'Z' then wrap around
             if (text[i] + shift > 90) {
@@ -32,7 +33,7 @@ int main (int argc, string argv[])
                 text[i] += shift;
             }
         // If char is 'a'-'z'
-        } else if (text[i] >= 97 && text[i] <= 122) {
+        } else if (islower(text[i])) {
              if (text[i] + shift > 122) {
                 // If shift goes higher than 'z' then wrap around
                 text[i] += shift - 26;

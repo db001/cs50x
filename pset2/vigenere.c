@@ -25,12 +25,21 @@ int main (int argc, string argv[])
     printf("ciphertext: ");
     
     for (int i = 0, n = strlen(text); i < n; i++) {
+        
         if (isalpha(text[i])) {
-            text[i] += cipher[i % x] - 97;
+            char c = text[i] + cipher[i % x] - 97;
+            if (c - 97 > 26) {
+                printf("%c", c - 26);
+            } else {
+                printf("%c", c);
+            }
+        } else {
             printf("%c", text[i]);
         }
         
     }
+    
     printf("\n");
     
+    return 0;
 }
