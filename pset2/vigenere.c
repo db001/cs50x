@@ -11,13 +11,23 @@ int main (int argc, string argv[])
         return 1;
     }
     
+    // Check for any numbers in the cipher
+    for (int j = 0, x = strlen(argv[1]); j < x; j++) {
+        if(isdigit(argv[1][j])) {
+            printf("Invalid cipher");
+            return 1;
+        }
+    }
+    
     printf("plaintext: ");
     string text = get_string();
     
     if (text == NULL) {
         printf("String not usable\n");
-        return 2;
+        return 1;
     }
+    
+    
     
     string cipher = argv[1];
     int x = strlen(cipher);
@@ -28,16 +38,23 @@ int main (int argc, string argv[])
     
     for (int i = 0, n = strlen(text); i < n; i++) {
         
-        int c = text[i] + cipher[count % x] - 97; // Needs to be an int as char overflows at more than 127
-        
         if (isalpha(text[i])) {
             
+            int c = text[i] + cipher[count % x];  // Needs to be an int to prevent overflow if c > 127
+            
+            if(isupper(text[i])) {
+                c -= 65;
+            } else if(islower(text[i])) {
+                c -= 97;
+                printf("%i", c);
+            }
+            
             if (islower(text[i]) && c > 122) {
-                printf("%c", c - 26);
+                printf("%c\n", c - 26);
             } else if (isupper(text[i]) && c > 90) {
-                printf("%c", c - 26);
+                printf("%c\n", c - 26);
             } else {
-                printf("%c", c);
+                printf("%c\n", c);
             }
             
             count += 1;
