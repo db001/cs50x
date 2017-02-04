@@ -32,6 +32,7 @@ int main (int argc, string argv[])
             } else {
                 text[i] += shift;
             }
+            
         // If char is 'a'-'z'
         } else if (islower(text[i])) {
              if (text[i] + shift > 122) {

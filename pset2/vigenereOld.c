@@ -37,43 +37,39 @@ int main (int argc, string argv[])
     // Loop through input text
     for (int i = 0, len = strlen(text); i < len; i++) {
         
-        int shift;
+        // Convert char at i'th index of cipher to an int and use remainder to get value 0 < shift <= 26
+        int shift = cipher[count % x];
         
-        // Check that char is a letter
         if(isalpha(text[i])) {
-            
-            // Check is the cipher is upper or lowercase and set shift accordingly
-            if(isupper(cipher[count % x])) {
-                shift = cipher[count % x] - 65;
-            } else {
-                shift = cipher[count % x] - 97;
-            }
-            
-            if (isupper(text[i])) {
-                // If shift + text[i] goes higher than 'Z' then wrap around
-                if (text[i] + shift > 90) {
-                    text[i] += shift - 26;
-                } else {
-                    text[i] += shift;
-                }
-            
-            } else if (islower(text[i])) {
-                // If shift + text[i] goes higher than 'z' then wrap around
-                if (text[i] + shift > 122) {
-                    text[i] += shift - 26;
-                } else {
-                    text[i] += shift;
-                }
-            }
-            
-            printf("%c", text[i]);
-            count++;
-            
-        } else {
-            // Print char without shift if not a letter
-            printf("%c", text[i]);
-        }
         
+            // If char is uppercase...
+            if (isupper(text[i]))
+            {
+                shift -= 65;
+                printf("Text[i]: %c %i, Shift: %i ", text[i], text[i], shift);
+                // If shift goes higher than 'Z' then wrap around
+                if (text[i] + shift > 90) {
+                    printf("%c\n", text[i] += shift - 26);
+                } else {
+                    printf("%c\n", text[i] += shift);
+                }
+                
+            // If char is lowercase...
+            } else if (islower(text[i])) {
+                shift -= 97;
+                printf("Text[i]: %c %i, Shift: %i ", text[i], text[i], shift);
+                // If shift goes higher than 'z' then wrap around
+                if (text[i] + shift > 122) {
+                    printf("%c\n", text[i] += shift - 26);
+                } else {
+                    printf("%c\n", text[i] += shift);
+                }
+            }
+            count += 1;
+        } else {
+            printf("Text[i]: %c %i, Shift: %i ", text[i], text[i], shift);
+            printf("%c\n", text[i]);
+        }
     }
     
     printf("\n");

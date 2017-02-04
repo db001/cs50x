@@ -39,10 +39,8 @@ int main (int argc, string argv[])
         
         int shift;
         
-        // Check that char is a letter
         if(isalpha(text[i])) {
             
-            // Check is the cipher is upper or lowercase and set shift accordingly
             if(isupper(cipher[count % x])) {
                 shift = cipher[count % x] - 65;
             } else {
@@ -50,16 +48,17 @@ int main (int argc, string argv[])
             }
             
             if (isupper(text[i])) {
-                // If shift + text[i] goes higher than 'Z' then wrap around
+            // If shift goes higher than 'Z' then wrap around
                 if (text[i] + shift > 90) {
                     text[i] += shift - 26;
                 } else {
                     text[i] += shift;
                 }
             
+             // If char is 'a'-'z'
             } else if (islower(text[i])) {
-                // If shift + text[i] goes higher than 'z' then wrap around
-                if (text[i] + shift > 122) {
+                 if (text[i] + shift > 122) {
+                    // If shift goes higher than 'z' then wrap around
                     text[i] += shift - 26;
                 } else {
                     text[i] += shift;
@@ -70,7 +69,6 @@ int main (int argc, string argv[])
             count++;
             
         } else {
-            // Print char without shift if not a letter
             printf("%c", text[i]);
         }
         
