@@ -26,6 +26,9 @@
 // board
 int board[DIM_MAX][DIM_MAX];
 
+// winning board
+int winner[DIM_MAX][DIM_MAX];
+
 // dimensions
 int d;
 
@@ -104,10 +107,12 @@ int main(int argc, string argv[])
         int tile = get_int();
         
         // quit if user inputs 0 (for testing)
+        /*
         if (tile == 0)
         {
             break;
         }
+        */
 
         // log move (for testing)
         fprintf(file, "%i\n", tile);
@@ -117,11 +122,11 @@ int main(int argc, string argv[])
         if (!move(tile))
         {
             printf("\nIllegal move.\n");
-            usleep(500000);
+            usleep(200000);
         }
 
         // sleep thread for animation's sake
-        usleep(500000);
+        usleep(200000);
     }
     
     // close log
@@ -156,7 +161,26 @@ void greet(void)
  */
 void init(void)
 {
-    // TODO
+    // get highest number on the board
+    int x = d * d - 1;
+    
+    for (int i = 0; i < d; i++) {
+        for (int j = 0; j < d; j++) {
+            board[i][j] = x;
+            winner[i][j] = d * d - x;
+            x--;
+            
+        }
+    }
+    
+    // Last item in winning array need to zero in order to make comaprison work
+    winner[d - 1][d - 1] = 0;
+    
+    // if odd number of tiles (d is even) then swap tiles "1" and "2"
+    if (d % 2 == 0) {
+        board[d - 1][d - 2] = 2;
+        board[d - 1][d - 3] = 1;
+    }
 }
 
 /**
@@ -164,7 +188,23 @@ void init(void)
  */
 void draw(void)
 {
-    // TODO
+    printf("\n");
+    int i, j;
+    for (i = 0; i < d; i++) {
+        for (j = 0; j < d; j++) {
+            if (board[i][j] == 0) {
+                printf("  _ ");
+            }
+            // add an extra space to numbers less than 10 for formatting
+            else if (board[i][j] < 10) {
+                printf("  %d ", board[i][j]);
+            }
+            else {
+                printf(" %d ", board[i][j]);
+            }
+        }
+        printf("\n\n");
+    }
 }
 
 /**
@@ -173,7 +213,42 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
+    if (tile  == 0) {
+        return false;
+    }
+    
+    int row, col;
+    int i, j;
+    
+    // get position of tile
+    for (i = 0; i < d; i++) {
+        for (j = 0; j < d; j++) {
+            if (board[i][j] == tile) {
+                row = i;
+                col = j;
+            }
+        }
+    }
+    
+    // checks to see if selected tile is adjacent to 0 (_)
+    if (row - 1 >= 0 && board[row - 1][col] == 0) {
+        board[row - 1][col] = tile;
+        board[row][col] = 0;
+        return true;
+    } else if (row + 1 < d && board[row + 1][col] == 0) {
+        board[row + 1][col] = tile;
+        board[row][col] = 0;
+        return true;
+    } else if (col - 1 >= 0 && board[row][col - 1] == 0) {
+        board[row][col - 1] = tile;
+        board[row][col] = 0;
+        return true;
+    } else if (col + 1 < d && board[row][col + 1] == 0) {
+        board[row][col + 1] = tile;
+        board[row][col] = 0;
+        return true;
+    }
+    
     return false;
 }
 
@@ -184,5 +259,14 @@ bool move(int tile)
 bool won(void)
 {
     // TODO
-    return false;
+    int i, j;
+
+    for (i = 0; i < d; i++) {
+        for (j = 0; j < d; j++) {
+            if (board[i][j] != winner[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
