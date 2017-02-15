@@ -173,7 +173,7 @@ void init(void)
         }
     }
     
-    // Last item in winning array need to zero in order to make comaprison work
+    // Last item in winning array needs to be zero in order to make comparison work
     winner[d - 1][d - 1] = 0;
     
     // if odd number of tiles (d is even) then swap tiles "1" and "2"

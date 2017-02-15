@@ -1,0 +1,25 @@
+1.  stdint.h defines several integer types and gives them a certain width (number of bits for storage).
+2.  Different systems may allocate a different amount of memory to data types such as an INT.  Using these ensures that the system allocates the expected amount of memory.
+3.  BYTE 1 byte (8 bits), DWORD 4 bytes (32 bits), LONG 4 bytes (32 bits), WORD 2 bytes (16 bits).
+4.  0x42 0x4D
+5.  bfSize is the size of the entire bitmap file, biSize is the size of the BITMAPINFOHEADER and always equals 14 bytes.
+6.  A negative biHEight means it is a "top down" bitmap with the origin in the top left.
+7.  biBitCount.
+8.  If fopen could not open the input file (line 24) or the output file (line 32).
+9.  The third argument dictates how many elements will be read, in this case it's one - BITMAPFILEHEADER.
+10. 3
+11. fseek positions a pointer to a specific place in a file.
+12. SEEK_CUR is the current file pointer position
+
+1. What’s stdint.h?
+2. What’s the point of using uint8_t, uint32_t, int32_t, and uint16_t in a program?
+3. How many bytes is a BYTE, a DWORD, a LONG, and a WORD, respectively?
+4. What (in ASCII, decimal, or hexadecimal) must the first two bytes of any BMP file be? Leading bytes used to identify file formats (with high probability) are generally called "magic numbers."
+5. What’s the difference between bfSize and biSize?
+6. What does it mean if biHeight is negative?
+7. What field in BITMAPINFOHEADER specifies the BMP’s color depth (i.e., bits per pixel)?
+8. Why might fopen return NULL in lines 24 and 32 of copy.c?
+9. Why is the third argument to fread always 1 in our code?
+10. What value does line 65 of copy.c assign to padding if bi.biWidth is 3?
+11. What does fseek do?
+12. What is SEEK_CUR?
