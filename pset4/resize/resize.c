@@ -63,14 +63,6 @@ int main(int argc, char *argv[])
         return 4;
     }
     
-    /*
-    // Update values in Bitmap header by appropriate factors
-    bi.biWidth *= n;// Width of image in pixels
-    bi.biHeight *= n;  // Height of image in pixels
-    bi.biSizeImage =  (bi.biWidth * 3) * (bi.biHeight * 3);  // Size of image in bytes (3 bytes per pixel)
-    bf.bfSize = bi.biSizeImage + 14 + 40;  // biSizeImage + header files (14 and 40 bytes)
-    */
-    
     // new Bitmap headers for outfile
     BITMAPFILEHEADER outBf = bf;
     BITMAPINFOHEADER outBi = bi;
@@ -85,13 +77,25 @@ int main(int argc, char *argv[])
     outBi.biSizeImage = (outBi.biWidth * sizeof(RGBTRIPLE) + resPad) * abs(outBi.biHeight);  // Size of image in bytes (3 bytes per pixel)
     outBf.bfSize = outBi.biSizeImage + 14 + 40; // biSizeImage + header files (14 and 40 bytes)
     
-    /*
+    
     // Error checking information for resized bmp
-    fprintf(stdout, "%i %i\n", bi.biWidth, outBi.biWidth);
-    fprintf(stdout, "%i %i\n", bi.biHeight, outBi.biHeight);
-    fprintf(stdout, "%i %i\n", bi.biSizeImage, outBi.biSizeImage);
-    fprintf(stdout, "%i %i\n", bf.bfSize, outBf.bfSize);
-    */
+    fprintf(stdout, "bfType: %i %i\n", bf.bfType, outBf.bfType); 
+    fprintf(stdout, "bfSize: %i %i\n", bf.bfSize, outBf.bfSize); 
+    // fprintf(stdout, "%i %i\n", bf.bfReserved1, outBf.bfReserved1); 
+    // fprintf(stdout, "%i %i\n", bf.bfReserved2, outBf.bfReserved2); 
+    fprintf(stdout, "bfOffBits: %i %i\n", bf.bfOffBits, outBf.bfOffBits);
+    fprintf(stdout, "biSize: %i %i\n", bi.biSize, outBi.biSize); 
+    fprintf(stdout, "biWidth: %i %i\n", bi.biWidth, outBi.biWidth); 
+    fprintf(stdout, "biHeight: %i %i\n", bi.biHeight, outBi.biHeight); 
+    // fprintf(stdout, "%i %i\n", bi.biPlanes, outBi.biPlanes); 
+    fprintf(stdout, "biBitCount: %i %i\n", bi.biBitCount, outBi.biBitCount); 
+    // fprintf(stdout, "%i %i\n", bi.biCompression, outBi.biCompression); 
+    fprintf(stdout, "biSizeImage: %i %i\n", bi.biSizeImage, outBi.biSizeImage); 
+    // fprintf(stdout, "%i %i\n", bi.biXPelsPerMeter, outBi.biXPelsPerMeter); 
+    // fprintf(stdout, "%i %i\n", bi.biYPelsPerMeter, outBi.biYPelsPerMeter); 
+    // fprintf(stdout, "%i %i\n", bi.biClrUsed, outBi.biClrUsed); 
+    // fprintf(stdout, "%i %i\n", bi.biClrImportant, outBi.biClrImportant);
+    
 
     // write outfile's BITMAPFILEHEADER
     fwrite(&outBf, sizeof(BITMAPFILEHEADER), 1, outptr);
