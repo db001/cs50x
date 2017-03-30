@@ -3,7 +3,7 @@
 3.  BYTE 1 byte (8 bits), DWORD 4 bytes (32 bits), LONG 4 bytes (32 bits), WORD 2 bytes (16 bits).
 4.  0x42 0x4D
 5.  bfSize is the size of the entire bitmap file, biSize is the size of the BITMAPINFOHEADER and always equals 14 bytes.
-6.  A negative biHEight means it is a "top down" bitmap with the origin in the top left.
+6.  A negative biHeight means it is a "top down" bitmap with the origin in the top left.
 7.  biBitCount.
 8.  If fopen could not open the input file (line 24) or the output file (line 32).
 9.  The third argument dictates how many elements will be read, in this case it's one - BITMAPFILEHEADER.

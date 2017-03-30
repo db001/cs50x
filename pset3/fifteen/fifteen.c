@@ -193,9 +193,11 @@ void draw(void)
     for (i = 0; i < d; i++) {
         for (j = 0; j < d; j++) {
             if (board[i][j] == 0) {
+                // instead of printing 0 use underscore
                 printf("  _ ");
             }
-            // add an extra space to numbers less than 10 for formatting
+            // add an extra space to numbers less than 10 for formatting 
+            // printf width specifier
             else if (board[i][j] < 10) {
                 printf("  %d ", board[i][j]);
             }
@@ -230,6 +232,7 @@ bool move(int tile)
         }
     }
     
+    // never look at rows/columns < 0 or greater than size  ||  distance formula
     // checks to see if selected tile is adjacent to 0 (_)
     if (row - 1 >= 0 && board[row - 1][col] == 0) {
         board[row - 1][col] = tile;
